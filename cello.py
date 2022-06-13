@@ -1,35 +1,36 @@
-
-from cmath import rect
+# Imports
+import sys
 import pygame
 
-from pygame.locals import *
-
-from sys import exit
-
+# Configuration
 pygame.init()
-
-largura = 1000
-
-altura = 680
-
-tela = pygame.display.set_mode((largura, altura))
+fps = 250
+fpsClock = pygame.time.Clock()
+altura, largura = 640, 480
+tela = pygame.display.set_mode((altura, largura), pygame.RESIZABLE)
 pygame.display.set_caption('Churrasmon Alpha Deluxe Version 0.0.0.1')
 
+x = largura/2
+y = 0
 
-while True:
+
+# Game loop.
+while  True:
+    tela.fill((20, 20, 20))
     for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()       
-            exit()
-            
-pygame.draw.rect(
-    screen,
-    [200, 200, 200],
-    [100, 100, 30, 60],
-        border_radius = 100
-    )
-pygame.draw.circle(tela, (0,0,255), (300,260), 40)
-pygame.draw.circle(tela, 250,250,250,250,250,250)
+            if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
 
-            
-pygame.display.update()
+    pygame.draw.rect(
+    tela,
+    [250, 0, 0],
+    [x, y, 30, 60],
+    )
+    
+    if y >= altura:
+        y = 0
+    y = y + 1
+
+    pygame.display.flip()
+    fpsClock.tick(fps)
